@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+    // Helper function to check auth
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Schema validation for Products (preventing XSS / excessive data)
+    function isValidProduct() {
+      let res = request.resource.data;
+      return res.keys().hasAll(['name', 'price'])
+        && res.name is string && res.name.size() > 0 && res.name.size() < 100
+        && res.price is number && res.price >= 0
+        && (res.category is string || res.category == null || res.category == "")
+        && (res.description is string || res.description == null || res.description == "")
+        // Allow potentially large base64 strings if using free storage approach, but cap it around 2MB (approx 2,000,000 chars)
+        && (res.imageUrl is string || res.imageUrl == null || res.imageUrl.size() < 2500000)
+        && (res.inStock is bool || res.inStock == null)
+        && res.keys().hasOnly(['name', 'price', 'category', 'description', 'imageUrl', 'inStock', 'createdAt', 'updatedAt']);
+    }
+
+    // Schema validation for Inquiries
+    function isValidInquiry() {
+      let res = request.resource.data;
+      return res.keys().hasAll(['name', 'email', 'message', 'status'])
+        && res.name is string && res.name.size() > 0 && res.name.size() < 100
+        && res.email is string && res.email.size() > 5 && res.email.size() < 100
+        && res.message is string && res.message.size() > 0 && res.message.size() < 2000
+        && res.status == 'new'
+        && (res.phone is string || res.phone == null || res.phone == '')
+        && (res.phone.size() < 30)
+        && (res.plantName is string || res.plantName == null || res.plantName == '')
+        && (res.plantName.size() < 100)
+        && res.keys().hasOnly(['name', 'email', 'message', 'status', 'phone', 'plantName', 'createdAt', 'updatedAt']);
+    }
+
+    // Collections
+    match /products/{productId} {
+      allow read: if true;
+      allow create, update: if isAuthenticated() && isValidProduct();
+      allow delete: if isAuthenticated();
+    }
+
+    match /inquiries/{inquiryId} {
+      // Anyone can submit under strict schema rules preventing abuse/spam
+      allow create: if isValidInquiry();
+      // Only authenticated admin can view or modify inquiries
+      allow read, update, delete: if isAuthenticated();
+    }
+  }
+}

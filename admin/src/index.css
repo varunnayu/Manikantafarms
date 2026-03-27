@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* Extreme minimal SaaS dark theme inspired by Vercel/Stripe */
+  --bg-app: #0a0a0a;
+  --bg-nav: #0a0a0a;
+  --bg-surface: #111111;
+  --bg-surface-hover: #1a1a1a;
+  
+  --border: #222222;
+  --border-hover: #333333;
+  --ring: rgba(255, 255, 255, 0.1);
+
+  --text-primary: #ededed;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+
+  --accent: #fff;
+  --accent-fg: #000;
+  
+  --status-new-bg: rgba(59, 130, 246, 0.1);
+  --status-new-text: #60a5fa;
+  --status-replied-bg: rgba(16, 185, 129, 0.1);
+  --status-replied-text: #34d399;
+  --status-closed-bg: rgba(113, 113, 122, 0.1);
+  --status-closed-text: #a1a1aa;
+  
+  --status-instock-bg: rgba(16, 185, 129, 0.1);
+  --status-instock-text: #34d399;
+  --status-outstock-bg: rgba(239, 68, 68, 0.1);
+  --status-outstock-text: #f87171;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Layouts */
+.glass {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+.card:hover {
+  border-color: var(--border-hover);
+}
+
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+  border-color: var(--border-hover);
+}
+
+.input {
+  width: 100%;
+  background: var(--bg-app);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  padding: 0.6rem 1rem;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--text-muted);
+  box-shadow: 0 0 0 2px var(--ring);
+}
+.input::placeholder { color: var(--text-muted); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  font-size: 0.875rem; font-weight: 500;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+.btn-secondary {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover {
+  background: var(--bg-surface-hover);
+  border-color: var(--border-hover);
+}
+.btn-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border: 1px solid transparent;
+}
+.btn-danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.badge {
+  display: inline-flex; align-items: center; gap: 0.25rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem; font-weight: 500;
+}
+.badge-new { background: var(--status-new-bg); color: var(--status-new-text); }
+.badge-replied { background: var(--status-replied-bg); color: var(--status-replied-text); }
+.badge-closed { background: var(--status-closed-bg); color: var(--status-closed-text); }
+.badge-in { background: var(--status-instock-bg); color: var(--status-instock-text); }
+.badge-out { background: var(--status-outstock-bg); color: var(--status-outstock-text); }
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fade-in { animation: fadeIn 0.3s ease; }
+.animate-slide-up { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
