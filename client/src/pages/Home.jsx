@@ -27,64 +27,45 @@ export default function Home() {
     <div className="min-h-screen">
 
       {/* ── Premium Hero Section ───────────────────────────── */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+      <section
+        className="relative min-h-[95vh] flex items-center justify-center overflow-hidden pt-20 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1524486361537-8ad15938e1a3?q=80&w=1920&auto=format&fit=crop")' }}
+      >
+        {/* Dark Gradient Overlay for readability */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
+        <div className="absolute inset-0 z-0 bg-gradient-to-t from-[var(--cream)]/10 to-transparent" />
 
-        {/* Abstract Background Elements */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[var(--cream-dark)] to-[var(--cream)]" />
-        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[var(--green-main)]/5 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
-        <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-[var(--green-light)]/10 rounded-full blur-3xl -translate-x-1/2 translate-y-1/3" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-10 pb-20">
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full grid lg:grid-cols-2 gap-12 lg:gap-8 items-center pt-10 pb-20">
-
-          <div className="text-center lg:text-left animate-fade-up">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--green-dark)]/5 border border-[var(--green-main)]/10 mb-8 w-max mx-auto lg:mx-0">
-              <Leaf className="w-4 h-4 text-[var(--green-main)]" />
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--green-main)]">Spring Collection 2026</span>
+          <div className="text-center md:text-left max-w-3xl animate-fade-up">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8 w-max mx-auto md:mx-0 shadow-lg">
+              <Leaf className="w-4 h-4 text-[var(--green-light)]" />
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">Spring Collection 2026</span>
             </div>
 
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-[var(--text-dark)] leading-[1.1] mb-6">
-              Bring Nature <br className="hidden lg:block" />
-              <span className="italic font-light text-[var(--green-main)]">Back Indoors.</span>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-white leading-[1.15] mb-6 drop-shadow-lg">
+              Quality Plants for <br className="hidden md:block" />
+              <span className="italic font-light text-[var(--green-light)]">Successful Farms.</span>
             </h1>
 
-            <p className="text-lg text-[var(--text-muted)] mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-              Curated architectural plants, rare succulents, and lush tropicals designed to elevate your living spaces. Cultivated with care, delivered to your door.
+            <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto md:mx-0 leading-relaxed font-medium drop-shadow-md">
+              We supply a professionally selected range of fruit plants, spice crops, and commercial plantation varieties. Healthy, field-ready plants raised with care to ensure strong establishment, high survival, and reliable performance for productive farming.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-              <Link to="/products" className="btn btn-primary text-base px-8 py-3.5 w-full sm:w-auto hover-lift group">
-                Shop Collection <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+              <Link to="/products" className="btn bg-[var(--green-main)] text-white hover:bg-[var(--green-dark)] shadow-xl text-base px-8 py-4 w-full sm:w-auto transition-transform hover:scale-105 group">
+                Shop Collection <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
               </Link>
-              <Link to="/inquiry" className="btn btn-outline text-base px-8 py-3.5 w-full sm:w-auto hover-lift">
+              <Link to="/inquiry" className="btn bg-white/10 backdrop-blur-md text-white border border-white/30 hover:bg-white/20 text-base px-8 py-4 w-full sm:w-auto transition-colors">
                 Contact an Expert
               </Link>
             </div>
 
             {/* Trust Badges */}
-            <div className="mt-12 flex items-center justify-center lg:justify-start gap-8 opacity-70">
-              <div className="flex items-center gap-2"><Sun className="w-5 h-5 text-[var(--text-muted)]" /> <span className="text-sm font-semibold text-[var(--text-muted)]">Light Needs</span></div>
-              <div className="flex items-center gap-2"><Droplets className="w-5 h-5 text-[var(--text-muted)]" /> <span className="text-sm font-semibold text-[var(--text-muted)]">Hydration</span></div>
-              <div className="flex items-center gap-2"><Wind className="w-5 h-5 text-[var(--text-muted)]" /> <span className="text-sm font-semibold text-[var(--text-muted)]">Air Purifying</span></div>
-            </div>
-          </div>
-
-          {/* Hero Imagery - Parallax Effect Container */}
-          <div className="relative animate-fade-in delay-200 hidden md:block">
-            {/* Floating Abstract Leaf SVG for modern SaaS look, replacing standard image if empty, but we'll use a strong styled box */}
-            <div className="relative w-full aspect-square max-w-lg mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[var(--green-dark)] to-[var(--green-light)] rounded-[3rem] rotate-3 animate-float opacity-90 shadow-2xl" />
-              <div className="absolute inset-0 bg-[var(--green-main)] rounded-[3rem] -rotate-3 transition-transform duration-700 hover:rotate-0 flex items-center justify-center overflow-hidden border-4 border-white/10 glass-dark">
-                <Leaf className="w-48 h-48 text-white/20 animate-float" />
-                <div className="absolute bottom-8 left-8 right-8 glass rounded-2xl p-4 flex items-center gap-4 animate-fade-up delay-500 shadow-xl">
-                  <div className="w-12 h-12 rounded-xl bg-[var(--green-dark)] flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">🌱</span>
-                  </div>
-                  <div>
-                    <p className="font-bold text-sm text-[var(--text-dark)]">Monstera Deliciosa</p>
-                    <p className="text-xs font-semibold text-[var(--green-main)] uppercase tracking-wider">In High Demand</p>
-                  </div>
-                </div>
-              </div>
+            <div className="mt-16 flex flex-wrap items-center justify-center md:justify-start gap-6 sm:gap-10 opacity-90">
+              <div className="flex items-center gap-2 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10"><Sun className="w-5 h-5 text-[var(--green-light)]" /> <span className="text-sm font-semibold text-white tracking-wide">High Survival</span></div>
+              <div className="flex items-center gap-2 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10"><Droplets className="w-5 h-5 text-[var(--green-light)]" /> <span className="text-sm font-semibold text-white tracking-wide">Field Ready</span></div>
+              <div className="flex items-center gap-2 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10"><ShieldCheck className="w-5 h-5 text-[var(--green-light)]" /> <span className="text-sm font-semibold text-white tracking-wide">Productive Yields</span></div>
             </div>
           </div>
 
