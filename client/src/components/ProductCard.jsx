@@ -48,7 +48,7 @@ export default function ProductCard({ p, delay }) {
             </span>
           </div>
           <span className="text-lg font-bold text-[var(--green-dark)] ml-auto">
-            ${price}
+            ₹{price}
           </span>
         </div>
 

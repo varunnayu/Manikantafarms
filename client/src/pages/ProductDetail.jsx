@@ -115,7 +115,7 @@ export default function ProductDetail() {
                 {product.name}
               </h1>
               <p className="text-3xl font-light text-[var(--green-dark)]">
-                ${price}
+                ₹{price}
               </p>
             </div>
 

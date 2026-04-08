@@ -3,7 +3,7 @@ import { db } from '../firebase';
 import { collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, orderBy, serverTimestamp } from 'firebase/firestore';
 import { compressImage, base64SizeKB } from '../utils/imageUtils';
 import toast from 'react-hot-toast';
-import { Plus, Edit2, Trash2, X, Search, Loader2, ImagePlus, Tag, DollarSign, FileText, Image as ImageIcon } from 'lucide-react';
+import { Plus, Edit2, Trash2, X, Search, Loader2, ImagePlus, Tag, DollarSign, FileText, Image as ImageIcon, PackageSearch } from 'lucide-react';
 
 const CATEGORIES = ['Indoor', 'Outdoor', 'Succulents', 'Tropical', 'Herbs', 'Trees', 'Flowers', 'Other'];
 const EMPTY_FORM = { name: '', category: '', price: '', description: '', inStock: true, imageUrl: '' };
@@ -216,7 +216,7 @@ export default function Products() {
                   <h3 className="font-bold text-white text-lg truncate leading-tight">{p.name}</h3>
                   <div className="flex items-center justify-between mt-1.5">
                     <span className="text-zinc-500 text-xs font-medium uppercase tracking-wider">{p.category || 'Uncategorized'}</span>
-                    <span className="font-semibold text-white">${parseFloat(p.price || 0).toFixed(2)}</span>
+                    <span className="font-semibold text-white">₹{parseFloat(p.price || 0).toFixed(2)}</span>
                   </div>
                 </div>
 
@@ -326,7 +326,7 @@ export default function Products() {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-zinc-400 mb-2 block">PRICE ($) <span className="text-red-400">*</span></label>
+                  <label className="text-xs font-semibold text-zinc-400 mb-2 block">PRICE (₹) <span className="text-red-400">*</span></label>
                   <input required type="number" min="0" step="0.01" value={form.price} onChange={e => setForm(f => ({...f, price: e.target.value}))} placeholder="9.99" className="input" />
                 </div>
               </div>

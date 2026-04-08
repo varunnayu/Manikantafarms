@@ -18,11 +18,12 @@ export default function Footer() {
                 <Leaf className="w-5 h-5 text-white" strokeWidth={2.5} />
               </div>
               <span className="font-serif font-bold text-xl tracking-wide">
-                Manikanta
+                Manikanta Nursery & Farms
               </span>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">
-              Cultivating premium indoor and outdoor botanicals. Bringing nature’s finest directly to your doorstep with guaranteed freshness.
+              <strong className="text-white block mb-2 font-serif tracking-wide">The Manikanta Standard</strong>
+              We believe successful farming begins with quality plants. Our commitment to excellence ensures healthy, well-established planting material that supports strong growth and dependable field performance.
             </p>
             <div className="flex items-center gap-4 text-gray-400">
               <a href="#" className="hover:text-white transition-colors"><Globe className="w-5 h-5" /></a>
@@ -33,7 +34,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-serif font-bold text-lg mb-6">Collections</h4>
+            {/* <h4 className="font-serif font-bold text-lg mb-6">Collections</h4>
             <ul className="space-y-4">
               {['Indoor Plants', 'Outdoor Botanicals', 'Rare Succulents', 'Fresh Herbs', 'Bonsai Trees'].map((l) => (
                 <li key={l}>
@@ -42,11 +43,11 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </div>
 
           <div>
-            <h4 className="font-serif font-bold text-lg mb-6">Support</h4>
+            {/* <h4 className="font-serif font-bold text-lg mb-6">Support</h4>
             <ul className="space-y-4">
               {['Plant Care Guide', 'Shipping & Returns', 'Track Order', 'FAQ', 'Privacy Policy'].map((l) => (
                 <li key={l}>
@@ -55,7 +56,7 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </div>
 
           {/* Contact */}
@@ -64,15 +65,15 @@ export default function Footer() {
             <ul className="space-y-5 text-sm text-gray-400">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-gray-500 shrink-0 mt-0.5" />
-                <span>123 Botanical Garden Way<br />Greenville, OR 97001</span>
+                <span>Manikanta nursery and farm balehalli<br />Balehalli, chikkamagalur 577111<br />Karnataka</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-gray-500 shrink-0" />
-                <span>(555) 123-4567</span>
+                <span>8147109918</span>
               </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-gray-500 shrink-0" />
-                <span>support@manikantafarms.com</span>
+              <li className="flex items-start gap-3">
+                <Mail className="w-5 h-5 text-gray-500 shrink-0 mt-0.5" />
+                <a href="mailto:manikantanurserybalehalli@gmail.com" className="hover:text-white transition-colors break-all">manikantanurserybalehalli@gmail.com</a>
               </li>
             </ul>
           </div>

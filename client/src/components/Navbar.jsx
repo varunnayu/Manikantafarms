@@ -37,7 +37,7 @@ export default function Navbar() {
           ${scrolled ? 'glass py-3 sm:py-4 shadow-sm' : 'bg-transparent py-5 sm:py-6'}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          
+
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[var(--green-dark)] flex items-center justify-center
@@ -76,7 +76,7 @@ export default function Navbar() {
             <Link to="/products" className="!hidden md:!inline-flex btn btn-primary px-6 py-2">
               <ShoppingBag className="w-4 h-4" /> Shop Now
             </Link>
-            
+
             <button
               onClick={toggleMobile}
               className="md:hidden p-2 rounded-lg text-[var(--green-dark)] hover:bg-[rgba(26,49,34,0.05)] transition-colors"
@@ -92,11 +92,11 @@ export default function Navbar() {
       <div className={`fixed inset-0 z-[60] md:hidden transition-all duration-500
                       ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={toggleMobile} />
-        
+
         <div className={`absolute top-0 right-0 h-full w-[80%] max-w-sm bg-[var(--cream)] shadow-2xl
                          flex flex-col pt-24 px-6 gap-6 transition-transform duration-500
                          ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          
+
           {/* Close button inside drawer */}
           <button
             onClick={toggleMobile}

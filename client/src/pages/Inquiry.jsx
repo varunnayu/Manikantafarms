@@ -25,7 +25,7 @@ export default function Inquiry() {
     try {
       await addDoc(collection(db, 'inquiries'), {
         name: form.name.trim(),
-        email: form.email.trim(),
+        email: form.email.trim() || 'not-provided@example.com',
         phone: form.phone.trim(),
         plantName: form.plantName.trim(),
         message: form.message.trim(),
@@ -116,10 +116,11 @@ export default function Inquiry() {
                   <div className="relative">
                     <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)] pointer-events-none z-10" />
                     <input
+                      required
                       type="tel"
                       value={form.phone}
                       onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
-                      placeholder="Phone Number (Optional)"
+                      placeholder="Phone Number *"
                       className="input-premium !pl-12 bg-white/95 focus:bg-white text-gray-900 border-none shadow-inner"
                     />
                   </div>
@@ -129,11 +130,10 @@ export default function Inquiry() {
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)] pointer-events-none z-10" />
                   <input
-                    required
                     type="email"
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                    placeholder="Email Address *"
+                    placeholder="Email Address"
                     className="input-premium !pl-12 bg-white/95 focus:bg-white text-gray-900 border-none shadow-inner"
                   />
                 </div>

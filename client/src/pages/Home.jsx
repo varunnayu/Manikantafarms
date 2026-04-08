@@ -25,32 +25,32 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      
+
       {/* ── Premium Hero Section ───────────────────────────── */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
-        
+
         {/* Abstract Background Elements */}
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-[var(--cream-dark)] to-[var(--cream)]" />
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-[var(--green-main)]/5 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
         <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-[var(--green-light)]/10 rounded-full blur-3xl -translate-x-1/2 translate-y-1/3" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full grid lg:grid-cols-2 gap-12 lg:gap-8 items-center pt-10 pb-20">
-          
+
           <div className="text-center lg:text-left animate-fade-up">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--green-dark)]/5 border border-[var(--green-main)]/10 mb-8 w-max mx-auto lg:mx-0">
               <Leaf className="w-4 h-4 text-[var(--green-main)]" />
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--green-main)]">Spring Collection 2026</span>
             </div>
-            
+
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-[var(--text-dark)] leading-[1.1] mb-6">
-              Bring Nature <br className="hidden lg:block"/>
+              Bring Nature <br className="hidden lg:block" />
               <span className="italic font-light text-[var(--green-main)]">Back Indoors.</span>
             </h1>
-            
+
             <p className="text-lg text-[var(--text-muted)] mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed">
               Curated architectural plants, rare succulents, and lush tropicals designed to elevate your living spaces. Cultivated with care, delivered to your door.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
               <Link to="/products" className="btn btn-primary text-base px-8 py-3.5 w-full sm:w-auto hover-lift group">
                 Shop Collection <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -59,12 +59,12 @@ export default function Home() {
                 Contact an Expert
               </Link>
             </div>
-            
+
             {/* Trust Badges */}
             <div className="mt-12 flex items-center justify-center lg:justify-start gap-8 opacity-70">
-              <div className="flex items-center gap-2"><Sun className="w-5 h-5 text-[var(--text-muted)]"/> <span className="text-sm font-semibold text-[var(--text-muted)]">Light Needs</span></div>
-              <div className="flex items-center gap-2"><Droplets className="w-5 h-5 text-[var(--text-muted)]"/> <span className="text-sm font-semibold text-[var(--text-muted)]">Hydration</span></div>
-              <div className="flex items-center gap-2"><Wind className="w-5 h-5 text-[var(--text-muted)]"/> <span className="text-sm font-semibold text-[var(--text-muted)]">Air Purifying</span></div>
+              <div className="flex items-center gap-2"><Sun className="w-5 h-5 text-[var(--text-muted)]" /> <span className="text-sm font-semibold text-[var(--text-muted)]">Light Needs</span></div>
+              <div className="flex items-center gap-2"><Droplets className="w-5 h-5 text-[var(--text-muted)]" /> <span className="text-sm font-semibold text-[var(--text-muted)]">Hydration</span></div>
+              <div className="flex items-center gap-2"><Wind className="w-5 h-5 text-[var(--text-muted)]" /> <span className="text-sm font-semibold text-[var(--text-muted)]">Air Purifying</span></div>
             </div>
           </div>
 
@@ -74,16 +74,16 @@ export default function Home() {
             <div className="relative w-full aspect-square max-w-lg mx-auto">
               <div className="absolute inset-0 bg-gradient-to-tr from-[var(--green-dark)] to-[var(--green-light)] rounded-[3rem] rotate-3 animate-float opacity-90 shadow-2xl" />
               <div className="absolute inset-0 bg-[var(--green-main)] rounded-[3rem] -rotate-3 transition-transform duration-700 hover:rotate-0 flex items-center justify-center overflow-hidden border-4 border-white/10 glass-dark">
-                 <Leaf className="w-48 h-48 text-white/20 animate-float" />
-                 <div className="absolute bottom-8 left-8 right-8 glass rounded-2xl p-4 flex items-center gap-4 animate-fade-up delay-500 shadow-xl">
-                   <div className="w-12 h-12 rounded-xl bg-[var(--green-dark)] flex items-center justify-center flex-shrink-0">
-                     <span className="text-2xl">🌱</span>
-                   </div>
-                   <div>
-                     <p className="font-bold text-sm text-[var(--text-dark)]">Monstera Deliciosa</p>
-                     <p className="text-xs font-semibold text-[var(--green-main)] uppercase tracking-wider">In High Demand</p>
-                   </div>
-                 </div>
+                <Leaf className="w-48 h-48 text-white/20 animate-float" />
+                <div className="absolute bottom-8 left-8 right-8 glass rounded-2xl p-4 flex items-center gap-4 animate-fade-up delay-500 shadow-xl">
+                  <div className="w-12 h-12 rounded-xl bg-[var(--green-dark)] flex items-center justify-center flex-shrink-0">
+                    <span className="text-2xl">🌱</span>
+                  </div>
+                  <div>
+                    <p className="font-bold text-sm text-[var(--text-dark)]">Monstera Deliciosa</p>
+                    <p className="text-xs font-semibold text-[var(--green-main)] uppercase tracking-wider">In High Demand</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -139,7 +139,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8">
             {featured.length > 0 ? (
               featured.map((p, i) => (
-                <ProductCard key={p.id} p={p} delay={`delay-${Math.min((i+1)*100, 400)}`} />
+                <ProductCard key={p.id} p={p} delay={`delay-${Math.min((i + 1) * 100, 400)}`} />
               ))
             ) : (
               [1, 2, 3, 4].map((n) => (
@@ -151,7 +151,7 @@ export default function Home() {
       </section>
 
       {/* ── Bottom CTA ────────────────────────────────────────── */}
-      <section className="py-24 bg-[var(--green-dark)] border-b-[8px] border-[var(--green-main)]">
+      {/* <section className="py-24 bg-[var(--green-dark)] border-b-[8px] border-[var(--green-main)]">
         <div className="max-w-4xl mx-auto px-4 text-center animate-fade-up">
           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6 leading-tight">
             Ready to cultivate your personal oasis?
@@ -165,8 +165,8 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
-      
+      </section> */}
+
     </div>
   );
 }
