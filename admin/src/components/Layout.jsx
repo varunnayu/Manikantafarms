@@ -4,20 +4,21 @@ import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, PackageSearch, MessageSquare,
   LogOut, Leaf, Menu, X, ChevronRight,
-  Bell, BellRing, Trash2, ExternalLink, Moon
+  Bell, BellRing, Trash2, ExternalLink, Moon, Coffee
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useInquiryNotifications } from '../hooks/useInquiryNotifications.jsx';
 
 const NAV = [
-  { to: '/',          icon: LayoutDashboard, label: 'Overview',  end: true },
-  { to: '/products',  icon: PackageSearch,   label: 'Products',            },
-  { to: '/inquiries', icon: MessageSquare,   label: 'Inquiries',           },
+  { to: '/', icon: LayoutDashboard, label: 'Overview', end: true },
+  { to: '/products', icon: PackageSearch, label: 'Plant Inventory', },
+  { to: '/special-offers', icon: Coffee, label: 'Coffee & Tea', },
+  { to: '/inquiries', icon: MessageSquare, label: 'Inquiries', },
 ];
 
 function relTime(date) {
   const s = Math.floor((Date.now() - date.getTime()) / 1000);
-  if (s < 60)   return 'just now';
+  if (s < 60) return 'just now';
   if (s < 3600) return `${Math.floor(s / 60)}m ago`;
   return `${Math.floor(s / 3600)}h ago`;
 }
@@ -33,9 +34,9 @@ function SideNavItem({ to, icon: Icon, label, end, badge, collapsed, onClick }) 
         `group flex items-center justify-between px-3 py-2.5 rounded-lg
          text-sm font-medium transition-all duration-200 relative mb-1
          ${isActive
-           ? 'bg-zinc-800/80 text-white shadow-sm ring-1 ring-zinc-700/50'
-           : 'text-zinc-400 hover:bg-zinc-900/50 hover:text-zinc-200'
-         }`
+          ? 'bg-zinc-800/80 text-white shadow-sm ring-1 ring-zinc-700/50'
+          : 'text-zinc-400 hover:bg-zinc-900/50 hover:text-zinc-200'
+        }`
       }
     >
       {({ isActive }) => (
@@ -116,12 +117,12 @@ function SidebarContent({ collapsed, onClose, user, onLogout, unreadCount }) {
    Layout root
 ══════════════════════════════════════════════════════════════ */
 export default function Layout() {
-  const { user, logout }              = useAuth();
-  const navigate                      = useNavigate();
-  const [collapsed, setCollapsed]     = useState(false);
-  const [mobileOpen, setMobileOpen]   = useState(false);
-  const [bellOpen, setBellOpen]       = useState(false);
-  const bellRef                       = useRef(null);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [bellOpen, setBellOpen] = useState(false);
+  const bellRef = useRef(null);
 
   const { notifications, clearAll, clearOne } = useInquiryNotifications();
   const unreadCount = notifications.length;
@@ -195,7 +196,7 @@ export default function Layout() {
 
         {/* ── Top Bar SaaS Style ───────────────────────── */}
         <header className="glass flex-shrink-0 h-16 flex items-center justify-between px-4 sm:px-8 z-30 sticky top-0">
-          
+
           <div className="flex items-center gap-4">
             <button
               className="md:hidden p-2 -ml-2 text-zinc-400 hover:text-white transition"
@@ -226,7 +227,7 @@ export default function Layout() {
                   ${bellOpen ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800/50 hover:text-white'}`}
               >
                 {unreadCount > 0 ? <BellRing className="w-5 h-5 text-emerald-400" /> : <Bell className="w-5 h-5" />}
-                
+
                 {unreadCount > 0 && (
                   <span className="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-red-500 ring-4 ring-[var(--bg-app)] animate-pulse" />
                 )}
@@ -235,7 +236,7 @@ export default function Layout() {
               {/* Bell Dropdown Panel */}
               {bellOpen && (
                 <div className="absolute right-0 top-[calc(100%+0.5rem)] w-80 rounded-xl shadow-2xl z-50 border border-zinc-800 bg-[#0f0f0f] animate-fade-in">
-                  
+
                   <div className="flex items-center justify-between px-5 py-3.5 border-b border-zinc-800">
                     <span className="text-sm font-semibold text-white">Notifications</span>
                     {unreadCount > 0 && (
@@ -288,7 +289,7 @@ export default function Layout() {
             <div className="w-8 h-8 rounded-full border border-zinc-700 bg-[var(--bg-surface)] flex items-center justify-center text-xs font-bold text-white shadow-sm">
               {user?.email?.[0]?.toUpperCase() || 'A'}
             </div>
-            
+
           </div>
         </header>
 

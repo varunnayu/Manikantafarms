@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import ProductCard from '../components/ProductCard';
+import SEO from '../components/SEO';
 import { Search, Loader2, Tag, FilterX } from 'lucide-react';
 
 const CATEGORIES = ['All', 'Indoor', 'Flowers', 'Other'];
@@ -22,6 +23,13 @@ export default function Products() {
     return unsub;
   }, []);
 
+  const [displayCount, setDisplayCount] = useState(12);
+
+  // Reset pagination when user types or filters
+  useEffect(() => {
+    setDisplayCount(12);
+  }, [search, filterCat]);
+
   const filtered = products.filter(p => {
     const matchSearch = (p.name || '').toLowerCase().includes(search.toLowerCase());
     const matchCat = filterCat === 'All' || p.category === filterCat;
@@ -30,6 +38,10 @@ export default function Products() {
 
   return (
     <div className="min-h-screen bg-[var(--cream)] pt-28 pb-24">
+      <SEO 
+        title="Plant Inventory" 
+        description="Browse our massive inventory of over 500+ acclimatized plant varieties. Superior yield commercial plants and beautiful exotics." 
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header Block */}
@@ -38,7 +50,7 @@ export default function Products() {
             The Botanical Collection
           </h1>
           <p className="text-lg text-[var(--text-muted)] leading-relaxed">
-            Discover our meticulously curated selection of indoor and outdoor specimens. Filter by category or search directly for your next perfect addition.
+            Fruit, vegetable, spice, commercial, and flower plants supported by expert plantation and forestry services.
           </p>
         </div>
 
@@ -91,7 +103,7 @@ export default function Products() {
         ) : filtered.length === 0 ? (
           <div className="py-24 flex flex-col items-center justify-center text-center bg-white rounded-3xl border border-[var(--cream-dark)] shadow-sm animate-fade-in">
             <FilterX className="w-16 h-16 text-[var(--green-accent)] opacity-40 mb-6" />
-            <h3 className="text-2xl font-serif font-bold text-[var(--text-dark)] mb-3">No matching botanicals</h3>
+            <h3 className="text-2xl font-serif font-bold text-[var(--text-dark)] mb-3">No matching plants</h3>
             <p className="text-[var(--text-muted)] max-w-sm mb-8">We couldn't find any plants matching your current search parameters or category filter.</p>
             <button
               onClick={() => { setSearch(''); setFilterCat('All'); }}
@@ -101,11 +113,25 @@ export default function Products() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
-            {filtered.map((p, i) => (
-              <ProductCard key={p.id} p={p} delay={`delay-${Math.min((i % 12) * 50, 600)}`} />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
+              {filtered.slice(0, displayCount).map((p, i) => (
+                <ProductCard key={p.id} p={p} delay={`delay-${Math.min((i % 12) * 50, 600)}`} />
+              ))}
+            </div>
+            
+            {/* Load More Button */}
+            {displayCount < filtered.length && (
+              <div className="mt-16 flex justify-center animate-fade-in">
+                <button
+                  onClick={() => setDisplayCount(prev => prev + 12)}
+                  className="btn btn-outline px-10 py-3.5 bg-white shadow-sm border-[var(--cream-dark)] hover:border-[var(--green-main)] text-[var(--text-dark)] font-semibold rounded-full hover:-translate-y-1 transition-all"
+                >
+                  Load More Plants
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

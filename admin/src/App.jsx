@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import Inquiries from './pages/Inquiries';
+import SpecialOffersAdmin from './pages/SpecialOffersAdmin';
 
 function ProtectedRoute({ children }) {
   const { user } = useAuth();
@@ -20,6 +21,7 @@ function AppRoutes() {
       <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
         <Route index element={<Dashboard />} />
         <Route path="products" element={<Products />} />
+        <Route path="special-offers" element={<SpecialOffersAdmin />} />
         <Route path="inquiries" element={<Inquiries />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />

@@ -2,22 +2,22 @@
 @import "tailwindcss";
 
 :root {
-  /* Extreme minimal SaaS dark theme inspired by Vercel/Stripe */
-  --bg-app: #0a0a0a;
-  --bg-nav: #0a0a0a;
-  --bg-surface: #111111;
-  --bg-surface-hover: #1a1a1a;
+  /* Premium Botanical Dark SaaS Theme */
+  --bg-app: #080c09;
+  --bg-nav: #080c09;
+  --bg-surface: #0d140f;
+  --bg-surface-hover: #131c15;
   
-  --border: #222222;
-  --border-hover: #333333;
-  --ring: rgba(255, 255, 255, 0.1);
+  --border: #1a261d;
+  --border-hover: #263629;
+  --ring: rgba(30, 70, 46, 0.25);
 
-  --text-primary: #ededed;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
+  --text-primary: #f6f8f4;
+  --text-secondary: #a1b0a6;
+  --text-muted: #6b7a70;
 
-  --accent: #fff;
-  --accent-fg: #000;
+  --accent: #1e462e;
+  --accent-fg: #fff;
   
   --status-new-bg: rgba(59, 130, 246, 0.1);
   --status-new-text: #60a5fa;
@@ -47,7 +47,7 @@ body {
 
 /* Layouts */
 .glass {
-  background: rgba(10, 10, 10, 0.7);
+  background: rgba(8, 12, 9, 0.8);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }

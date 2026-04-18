@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Inquiry from './pages/Inquiry';
+import SpecialOffers from './pages/SpecialOffers';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -45,6 +46,7 @@ export default function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/inquiry" element={<Inquiry />} />
+            <Route path="/special-offers" element={<SpecialOffers />} />
           </Routes>
         </main>
         <Footer />

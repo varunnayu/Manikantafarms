@@ -39,32 +39,40 @@ function StatCard({ label, value, icon: Icon, delay }) {
 export default function Dashboard() {
   const { user }                          = useAuth();
   const [products,  setProducts]          = useState([]);
+  const [offers,    setOffers]            = useState([]);
   const [inquiries, setInquiries]         = useState([]);
   const [loading,   setLoading]           = useState(true);
 
   useEffect(() => {
+    let loadedP = false, loadedO = false, loadedI = false;
+    const checkBgLoaded = () => { if (loadedP && loadedO && loadedI) setLoading(false); };
+
     const unsubP = onSnapshot(collection(db, 'products'), snap => {
       setProducts(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      loadedP = true; checkBgLoaded();
+    });
+    const unsubO = onSnapshot(collection(db, 'special_offers'), snap => {
+      setOffers(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      loadedO = true; checkBgLoaded();
     });
     const unsubI = onSnapshot(
       query(collection(db, 'inquiries'), orderBy('createdAt', 'desc')),
       snap => {
         setInquiries(snap.docs.map(d => ({ id: d.id, ...d.data() })));
-        setLoading(false);
+        loadedI = true; checkBgLoaded();
       }
     );
-    return () => { unsubP(); unsubI(); };
+    return () => { unsubP(); unsubO(); unsubI(); };
   }, []);
 
-  const inStock      = loading ? null : products.filter(p => p.inStock).length;
-  const outStock     = loading ? null : products.filter(p => !p.inStock).length;
+  const outStockCount = loading ? null : products.filter(p => !p.inStock).length + offers.filter(o => !o.inStock).length;
   const newInquiries = loading ? null : inquiries.filter(i => !i.status || i.status === 'new').length;
   const recent       = inquiries.slice(0, 4);
 
   const stats = [
-    { label: 'Total Products', value: loading ? null : products.length, icon: PackageSearch, delay: '' },
-    { label: 'In Stock', value: inStock, icon: CheckCircle, delay: 'delay-100' },
-    { label: 'Out of Stock', value: outStock, icon: TrendingUp, delay: 'delay-200' },
+    { label: 'Plant Inventory', value: loading ? null : products.length, icon: PackageSearch, delay: '' },
+    { label: 'Estate Reserves', value: loading ? null : offers.length, icon: CheckCircle, delay: 'delay-100' },
+    { label: 'Out of Stock', value: outStockCount, icon: TrendingUp, delay: 'delay-200' },
     { label: 'Unread Inquiries', value: newInquiries, icon: MessageSquare, delay: 'delay-300' },
   ];
 

@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import toast from 'react-hot-toast';
+import SEO from '../components/SEO';
 import { Leaf, Send, Loader2, Mail, Phone, User, MessageSquare } from 'lucide-react';
 
 export default function Inquiry() {
@@ -11,7 +12,7 @@ export default function Inquiry() {
   const prodName = params.get('name') || '';
 
   const [form, setForm] = useState({
-    name: '', email: '', phone: '', plantName: prodName, message: '',
+    name: '', email: '', phone: '', plantName: prodName, message: '', botField: '',
   });
   const [loading, setLoading] = useState(false);
 
@@ -21,9 +22,24 @@ export default function Inquiry() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Anti-bot Honeypot Check
+    if (form.botField) {
+      toast.success('Inquiry sent successfully!'); // silently fail bots
+      setForm({ name: '', email: '', phone: '', plantName: '', message: '', botField: '' });
+      return;
+    }
+
+    // Client-side Rate Limit (Stop rapid-fire requests)
+    const lastSent = localStorage.getItem('lastInquiryTime');
+    if (lastSent && Date.now() - parseInt(lastSent) < 60000 * 5) { // 5 Minute cooldown
+      toast.error('Please wait a few minutes before sending another inquiry.');
+      return;
+    }
+
     setLoading(true);
     try {
-      await addDoc(collection(db, 'inquiries'), {
+      const inquiryData = {
         name: form.name.trim(),
         email: form.email.trim() || 'not-provided@example.com',
         phone: form.phone.trim(),
@@ -31,10 +47,39 @@ export default function Inquiry() {
         message: form.message.trim(),
         status: 'new',
         createdAt: serverTimestamp()
+      };
+
+      // 1. Save to Firestore (Admin Dashboard)
+      await addDoc(collection(db, 'inquiries'), inquiryData);
+
+      // 2. Forward to Email (EmailJS)
+      const EMAILJS_SERVICE_ID = "service_dar7bi8";
+      const EMAILJS_TEMPLATE_ID = "template_ufnmnbn";
+      const EMAILJS_PUBLIC_KEY = "kPg540CltyHJT3EWK";
+
+      await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE_ID,
+          template_id: EMAILJS_TEMPLATE_ID,
+          user_id: EMAILJS_PUBLIC_KEY,
+          template_params: {
+            from_name: inquiryData.name,
+            from_email: inquiryData.email,
+            phone: inquiryData.phone,
+            plant_name: inquiryData.plantName,
+            message: inquiryData.message,
+            to_email: 'varunacc2@gmail.com'
+          }
+        })
       });
+
+      localStorage.setItem('lastInquiryTime', Date.now().toString());
       toast.success('Inquiry sent successfully!');
-      setForm({ name: '', email: '', phone: '', plantName: '', message: '' });
-    } catch {
+      setForm({ name: '', email: '', phone: '', plantName: '', message: '', botField: '' });
+    } catch (error) {
+      console.error("Error submitting inquiry:", error);
       toast.error('Failed to send inquiry.');
     } finally {
       setLoading(false);
@@ -43,6 +88,10 @@ export default function Inquiry() {
 
   return (
     <div className="min-h-screen relative flex items-center justify-center pt-24 pb-20 overflow-hidden bg-[var(--cream)]">
+      <SEO 
+        title="Contact & Inquiry" 
+        description="Get in touch with Manikanta Nursery & Farm. Direct WhatsApp support or email inquiry for bulk planting orders in Chikmagalur." 
+      />
 
       {/* ── Immersive Background Overlay ───────────────────────── */}
       <div className="absolute top-[80px] left-0 right-0 bottom-0 z-0 select-none pointer-events-none">
@@ -58,30 +107,7 @@ export default function Inquiry() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full grid lg:grid-cols-5 gap-12 items-center">
 
         {/* ── Left Content (Text) ───────────────────────── */}
-        {/* ── Left Content (Text) ───────────────────────── */}
         <div className="lg:col-span-2 text-center lg:text-left text-[var(--text-dark)] animate-fade-in delay-100">
-          {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--green-dark)]/10 backdrop-blur-md border border-[var(--green-dark)]/20 mb-8 w-max mx-auto lg:mx-0">
-            <MessageSquare className="w-4 h-4 text-[var(--green-dark)]" />
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--green-dark)]">Concierge Service</span>
-          </div> */}
-
-          {/* <h1 className="text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6 text-[var(--text-dark)] drop-shadow-sm">
-            Cultivate <br className="hidden lg:block" />
-            <span className="text-[var(--text-muted)] italic font-light">Your Vision.</span>
-          </h1> */}
-
-          {/* <p className="text-[var(--text-muted)] font-medium text-lg mb-10 leading-relaxed max-w-lg mx-auto lg:mx-0 drop-shadow-sm">
-            Whether you are inquiring about our premium botanicals, custom landscaping, or sourcing rare specimens, our expert horticulturalists are here to guide you.
-          </p> */}
-
-          {/* <div className="hidden lg:flex flex-col gap-6 pt-10 border-t border-[var(--black-dark)]/10">
-            <div className="flex items-center gap-4 text-[var(--text-muted)] font-medium">
-              <Phone className="w-5 h-5 opacity-80" /> (+1) 800 123 4567
-            </div>
-            <div className="flex items-center gap-4 text-[var(--text-muted)] font-medium">
-              <Mail className="w-5 h-5 opacity-80" /> concierge@manikantafarms.com
-            </div>
-          </div> */}
         </div>
 
         {/* ── Right Content (Glass Card Form) ───────────────────────── */}
@@ -126,6 +152,18 @@ export default function Inquiry() {
                   </div>
                 </div>
 
+                {/* Anti-spam Honeypot Field (Hidden from real users) */}
+                <div style={{ display: 'none' }}>
+                  <input
+                    type="text"
+                    name="botField"
+                    value={form.botField}
+                    onChange={e => setForm(f => ({ ...f, botField: e.target.value }))}
+                    tabIndex="-1"
+                    autoComplete="off"
+                  />
+                </div>
+
                 {/* Email Input */}
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)] pointer-events-none z-10" />
@@ -137,6 +175,7 @@ export default function Inquiry() {
                     className="input-premium !pl-12 bg-white/95 focus:bg-white text-gray-900 border-none shadow-inner"
                   />
                 </div>
+
 
                 {/* Plant Name (Autofilled if navigated from products) */}
                 <div className="relative">

@@ -22,41 +22,56 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">
-              <strong className="text-white block mb-2 font-serif tracking-wide">The Manikanta Standard</strong>
-              We believe successful farming begins with quality plants. Our commitment to excellence ensures healthy, well-established planting material that supports strong growth and dependable field performance.
+              <strong className="text-white block mb-2 font-serif tracking-wide"></strong>
             </p>
             <div className="flex items-center gap-4 text-gray-400">
-              <a href="#" className="hover:text-white transition-colors"><Globe className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-white transition-colors"><MessageCircle className="w-5 h-5" /></a>
+              <a href="https://www.google.com/maps/place/manikanta+Nursery+and+farm+Balehalli/@13.218662,75.6909879,1104m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3bbb2bbc6e333e13:0xec07356d1851a8f4!8m2!3d13.218662!4d75.6909879!16s%2Fg%2F11fvv8xw74?hl=en-GB&entry=ttu&g_ep=EgoyMDI2MDQwNi4wIKXMDSoASAFQAw%3D%3D" className="hover:text-white transition-colors"><Globe className="w-5 h-5" /></a>
+              <a href="https://wa.me/918147109918" className="hover:text-white transition-colors"><MessageCircle className="w-5 h-5" /></a>
               <a href="#" className="hover:text-white transition-colors"><Share2 className="w-5 h-5" /></a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            {/* <h4 className="font-serif font-bold text-lg mb-6">Collections</h4>
+            <h4 className="font-serif font-bold text-lg mb-6">Collections</h4>
             <ul className="space-y-4">
-              {['Indoor Plants', 'Outdoor Botanicals', 'Rare Succulents', 'Fresh Herbs', 'Bonsai Trees'].map((l) => (
-                <li key={l}>
-                  <Link to="/products" className="text-sm text-gray-400 hover:text-white transition-colors">
-                    {l}
-                  </Link>
-                </li>
-              ))}
-            </ul> */}
+              <li>
+                <Link to="/products" className="text-sm text-gray-400 hover:text-white transition-colors">
+                  Plant Inventory
+                </Link>
+              </li>
+              <li>
+                <Link to="/special-offers" className="text-sm text-gray-400 hover:text-white transition-colors">
+                  Estate Reserves (Coffee & Tea)
+                </Link>
+              </li>
+              <li>
+                <Link to="/products" className="text-sm text-gray-400 hover:text-white transition-colors">
+                  Commercial Crops
+                </Link>
+              </li>
+            </ul>
           </div>
 
           <div>
-            {/* <h4 className="font-serif font-bold text-lg mb-6">Support</h4>
+            <h4 className="font-serif font-bold text-lg mb-6">Support</h4>
             <ul className="space-y-4">
-              {['Plant Care Guide', 'Shipping & Returns', 'Track Order', 'FAQ', 'Privacy Policy'].map((l) => (
-                <li key={l}>
-                  <Link to="/" className="text-sm text-gray-400 hover:text-white transition-colors">
-                    {l}
-                  </Link>
-                </li>
-              ))}
-            </ul> */}
+              <li>
+                <Link to="/inquiry" className="text-sm text-gray-400 hover:text-white transition-colors">
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/inquiry" className="text-sm text-gray-400 hover:text-white transition-colors">
+                  Bulk Ordering
+                </Link>
+              </li>
+              <li>
+                <a href="https://wa.me/918147109918" className="text-sm text-gray-400 hover:text-white transition-colors" target="_blank" rel="noreferrer">
+                  WhatsApp Help
+                </a>
+              </li>
+            </ul>
           </div>
 
           {/* Contact */}

@@ -5,6 +5,7 @@ import { Leaf, Menu, X, ShoppingBag } from 'lucide-react';
 const LINKS = [
   { path: '/', label: 'Home' },
   { path: '/products', label: 'Collection' },
+  { path: '/special-offers', label: 'Flash Sale 🔥' },
   { path: '/inquiry', label: 'Contact Us' },
 ];
 
